@@ -1,14 +1,9 @@
 {
-  "tabWidth": 4,
-  "printWidth": 120,
-  "overrides": [
-    {
-      "files": "*.svelte",
-      "options": {
-        "parser": "svelte",
-        "svelteSortOrder": "scripts-markup-styles",
-        "svelteBracketNewLine": true
-      }
-    }
-  ]
+    "tabWidth": 3,
+    "printWidth": 120,
+    "svelteSortOrder": "scripts-markup-styles",
+    "svelteStrictMode": true,
+    "svelteBracketNewLine": true,
+    "svelteAllowShorthand": false,
+    "svelteIndentScriptAndStyle": true
 }
