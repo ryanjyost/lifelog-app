@@ -2,9 +2,15 @@
 <script>
    import firebase from "firebase/app";
    import "firebase/auth";
+   import axios from "axios";
+   import qs from "query-string";
    import { user } from "../stores";
 
-   let currentUser;
+   const { API_URL } = __myapp.env;
+   const query = qs.parse(window.location.search.replace("?", ""));
+   const isMagicLink = !!query.magicLink;
+
+   let firebaseUser;
 
    export let useRedirect = false;
 
@@ -16,41 +22,50 @@
       picture: claims.picture,
    });
 
-   user.subscribe((val) => {
-      currentUser = val;
-   });
-
-   export const loginWithEmail = (email, actionCodeSettings) => {
-      return auth.sendSignInLinkToEmail(email, actionCodeSettings);
-   };
-
    export const logout = () => auth.signOut();
+
+   async function createUser(data) {
+      console.log("create user", data);
+      const { data: newOrExistingUser } = await axios.post(`${API_URL}/users`, data);
+      user.set(newOrExistingUser);
+   }
+
+   async function fetchUser(filter = {}) {
+      const { data } = await axios.get(`${API_URL}/users`, { params: filter });
+
+      if (!data.user) {
+         await logout();
+      }
+
+      user.set(data.user);
+   }
 
    // will be fired every time auth state changes
    auth.onAuthStateChanged(async (fireUser) => {
       if (fireUser) {
-         console.log({ fireUser });
-         // in here you might want to do some further actions
-         // such as loading more data, etc.
-
-         // if you want to set custom claims such as roles on a user
-         // this is how to get them because they will be present
-         // on the token.claims object
          const token = await fireUser.getIdTokenResult();
-         user.set(userMapper(token.claims));
+         const userInfo = userMapper(token.claims);
+
+         firebaseUser = userInfo;
       } else {
          user.set(null);
       }
    });
 
    // reactive helper variable
-   $: loggedIn = currentUser !== null;
-   $: console.log({ currentUser });
+   $: loggedIn = $user !== null;
+
+   $: if ($user) {
+   } else if (isMagicLink && firebaseUser) {
+      createUser(firebaseUser);
+   } else if (firebaseUser) {
+      fetchUser({ firebase_id: firebaseUser.id });
+   }
 </script>
 
 <!-- we will expose all required methods and properties on our slot -->
 <main>
-   <slot user="{user}" loggedIn="{loggedIn}" loginWithEmail="{loginWithEmail}" logout="{logout}" />
+   <slot user="{$user}" loggedIn="{loggedIn}" logout="{logout}" />
 </main>
 
 <style>

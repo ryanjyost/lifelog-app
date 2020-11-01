@@ -1,7 +1,16 @@
+<script>
+   export let title = null;
+   export let showBackButton = false;
+</script>
+
 <header>
-   <slot>
-      <h4>My Private Lifelog</h4>
-   </slot>
+   {#if showBackButton}<a id="backButton" href="/#/logs">&larr;</a>{/if}
+
+   {#if title}
+      <h4>{title}</h4>
+   {/if}
+
+   <slot />
 </header>
 
 <style>
@@ -28,5 +37,14 @@
       color: #fff;
       font-weight: 900;
       font-size: 18px;
+   }
+
+   #backButton {
+      opacity: 0.8;
+      font-weight: 900;
+      font-size: 1.5rem;
+   }
+
+   .section {
    }
 </style>

@@ -17,7 +17,7 @@
    const auth = firebase.auth();
    const { API_URL } = __myapp.env;
    const actionCodeSettings = {
-      url: `${API_URL}/auth-redirect`,
+      url: `${API_URL}`,
       handleCodeInApp: true,
    };
 
@@ -25,10 +25,12 @@
       isRedirect = true;
 
       auth.signInWithEmailLink(emailForLogin, window.location.href);
+      window.localStorage.removeItem("email");
+      emailForLogin = null;
    }
 
    const loginWithEmail = async (email, actionCodeSettings) => {
-      return auth.sendSignInLinkToEmail(email, actionCodeSettings);
+      await auth.sendSignInLinkToEmail(email, actionCodeSettings);
    };
 
    async function handleSubmit(event) {
@@ -44,7 +46,6 @@
    }
 
    $: if (user) {
-      console.log("push");
       push("/logs");
    }
    $: disableLogin = !emailInput.length || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput);

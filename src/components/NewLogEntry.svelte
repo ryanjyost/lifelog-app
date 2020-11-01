@@ -5,6 +5,7 @@
    import Loading from "./Loading.svelte";
    import Header from "./Header.svelte";
    import AppShell from "./AppShell.svelte";
+   import { user } from "../stores";
 
    const { API_URL } = __myapp.env;
    const placeholders = [
@@ -28,7 +29,7 @@
    let snackbar;
 
    async function createLogEntry() {
-      return axios.post(`${API_URL}/logs`, { phone: "+14128411697", text: newLogText });
+      return axios.post(`${API_URL}/logs`, { user: $user.id, text: newLogText });
    }
 
    async function handleCreateLogEntry() {
@@ -53,7 +54,6 @@
 
    function focusTextarea() {
       setTimeout(() => {
-         console.log("focus");
          ref.focus();
       }, 100);
    }
@@ -64,8 +64,7 @@
 </script>
 
 <AppShell>
-   <Header>
-      <a id="cancelNewLogEntry" href="/#/logs">&larr;</a>
+   <Header showBackButton="{true}">
       <button id="save_log_entry" disabled="{!newLogText.length}" on:click="{handleCreateLogEntry}">Save</button>
    </Header>
    <textarea
@@ -104,12 +103,6 @@
       outline: none;
    }
 
-   #cancelNewLogEntry {
-      opacity: 0.8;
-      font-weight: 900;
-      font-size: 1.5rem;
-   }
-
    #save_log_entry {
       margin: 0px;
       border-radius: 20px;
@@ -146,6 +139,7 @@
       line-height: 1.2;
       display: flex;
       align-items: center;
+      margin: auto;
    }
 
    /* Show the snackbar when clicking on a button (class added with JavaScript) */

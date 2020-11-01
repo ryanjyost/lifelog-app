@@ -5,13 +5,15 @@
    import Loading from "./Loading.svelte";
    import Header from "./Header.svelte";
    import AppShell from "./AppShell.svelte";
+   import { user } from "../stores";
 
    const { API_URL } = __myapp.env;
 
-   let logs = [];
+   let logs = null;
+   let currentUser;
 
    async function fetchLogs() {
-      const response = await axios.get(`${API_URL}/logs`, { params: { phone: "+14128411697" } });
+      const response = await axios.get(`${API_URL}/logs`, { params: { id: $user.id } });
       logs = response.data;
    }
 
@@ -23,15 +25,19 @@
 </script>
 
 <AppShell>
-   <Header />
-   {#each logs as log}
-      <div class="log_container">
-         <p>{log.text}</p>
-         <caption>{formatTimestamp(log.created)}</caption>
-      </div>
-   {:else}
+   <Header title="My Private Lifelog"><a href="/#/menu" id="gearLink">&#9881;</a></Header>
+   {#if !logs}
       <Loading>Syncing your lifelog...</Loading>
-   {/each}
+   {:else}
+      {#each logs as log}
+         <div class="log_container">
+            <p>{log.text}</p>
+            <caption>{formatTimestamp(log.created)}</caption>
+         </div>
+      {:else}
+         <h4>You don't have any logs yet!</h4>
+      {/each}
+   {/if}
    <a id="add_log" href="/#/new-entry"><span id="plus">+</span></a>
 </AppShell>
 
@@ -42,12 +48,18 @@
       text-align: left;
    }
 
+   h4 {
+      width: 100%;
+      text-align: center;
+      color: #fff;
+   }
+
    .log_container {
       display: flex;
       flex-direction: column;
       padding: 30px 20px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      width: 100%;
+      /*width: 100%;*/
    }
 
    /*.log_container:nth-child(even) {*/
@@ -93,5 +105,9 @@
 
    #add_log:hover {
       text-decoration: none;
+   }
+
+   #gearLink {
+      font-size: 2rem;
    }
 </style>
