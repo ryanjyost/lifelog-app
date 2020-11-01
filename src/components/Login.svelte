@@ -15,14 +15,18 @@
 
    const params = qs.parse(window.location.search);
    const auth = firebase.auth();
-   const { API_URL } = __myapp.env;
+   const { CLIENT_URL } = __myapp.env;
    const actionCodeSettings = {
-      url: `${API_URL}`,
+      url: `${CLIENT_URL}`,
       handleCodeInApp: true,
    };
 
-   if (!user && emailForLogin && firebase.auth().isSignInWithEmailLink(window.location.href)) {
+   if (!user && firebase.auth().isSignInWithEmailLink(window.location.href)) {
       isRedirect = true;
+
+      if (!emailForLogin) {
+         emailForLogin = window.prompt("Please confirm your email.");
+      }
 
       auth.signInWithEmailLink(emailForLogin, window.location.href);
       window.localStorage.removeItem("email");
