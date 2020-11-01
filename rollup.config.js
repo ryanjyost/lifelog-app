@@ -8,6 +8,8 @@ import { config } from "dotenv";
 import replace from "@rollup/plugin-replace";
 
 const production = !process.env.ROLLUP_WATCH;
+const API_URL = process.env.API_URL;
+const CLIENT_URL = process.env.CLIENT_URL
 
 function serve() {
    let server;
@@ -53,6 +55,8 @@ export default {
          __myapp: JSON.stringify({
             env: {
                isProd: production,
+               API_URL,
+               CLIENT_URL,
                ...config().parsed, // attached the .env config
             },
          }),
