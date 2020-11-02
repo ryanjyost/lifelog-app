@@ -38,10 +38,11 @@
    async function handleMagicLink() {
       console.log("handle magic lingk");
       let emailForLogin = window.localStorage.getItem("email");
+      const { continueUrl } = query;
 
-      if (!window.location.href.includes(CLIENT_URL)) {
-         console.log(`Redirecting to ${CLIENT_URL}`);
-         window.location.href = `${CLIENT_URL}?${window.location.search}`;
+      if (!window.location.href.includes(continueUrl)) {
+         console.log(`Redirecting to ${continueUrl}`);
+         window.location.href = `${continueUrl}?${window.location.search}`;
       } else {
          if (!emailForLogin) {
             emailForLogin = window.prompt("Please confirm your email.");
