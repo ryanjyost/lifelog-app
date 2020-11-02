@@ -39,10 +39,11 @@
       console.log("handle magic lingk");
       let emailForLogin = window.localStorage.getItem("email");
       const { continueUrl } = query;
+      console.log({ continueUrl }, window.location.origin);
 
-      if (!window.location.href.includes(continueUrl)) {
+      if (window.location.origin !== continueUrl) {
          console.log(`Redirecting to ${continueUrl}`);
-         window.location.href = `${continueUrl}?${window.location.search}`;
+         window.location.href = `${continueUrl}${window.location.search}`;
       } else {
          if (!emailForLogin) {
             emailForLogin = window.prompt("Please confirm your email.");
