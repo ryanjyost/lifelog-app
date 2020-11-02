@@ -6,11 +6,9 @@
    import { fade } from "svelte/transition";
    import Loading from "./Loading.svelte";
 
-   let isRedirect;
    let isSendingEmailLink;
    let emailLinkSent = false;
    let emailForLogin = window.localStorage.getItem("email");
-   let user;
    let emailInput = "";
 
    const params = qs.parse(window.location.search);
@@ -20,18 +18,6 @@
       url: `${CLIENT_URL}`,
       handleCodeInApp: true,
    };
-
-   if (!user && firebase.auth().isSignInWithEmailLink(window.location.href)) {
-      isRedirect = true;
-
-      if (!emailForLogin) {
-         emailForLogin = window.prompt("Please confirm your email.");
-      }
-
-      auth.signInWithEmailLink(emailForLogin, window.location.href);
-      window.localStorage.removeItem("email");
-      emailForLogin = null;
-   }
 
    const loginWithEmail = async (email, actionCodeSettings) => {
       await auth.sendSignInLinkToEmail(email, actionCodeSettings);
@@ -49,9 +35,6 @@
       isSendingEmailLink = false;
    }
 
-   $: if (user) {
-      push("/logs");
-   }
    $: disableLogin = !emailInput.length || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput);
 </script>
 
@@ -61,8 +44,6 @@
          <h3>Magic link sent!</h3>
          <p>Check your <strong>{emailForLogin}</strong> inbox for the verification email.</p>
       </div>
-   {:else if isRedirect}
-      <Loading>Signing in...</Loading>
    {:else if isSendingEmailLink}
       <Loading>Sending magic link...</Loading>
    {:else}

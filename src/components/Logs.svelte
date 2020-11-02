@@ -25,7 +25,9 @@
 </script>
 
 <AppShell>
-   <Header title="My Private Lifelog"><a href="/#/menu" id="gearLink">&#9881;</a></Header>
+   <Header title="My Private Lifelog">
+      <a href="/#/menu" id="gearLink"><div class="hamgburgerMenuLine"></div></a>
+   </Header>
    {#if !logs}
       <Loading>Syncing your lifelog...</Loading>
    {:else}
@@ -109,5 +111,15 @@
 
    #gearLink {
       font-size: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+   }
+
+   .hamgburgerMenuLine {
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
    }
 </style>

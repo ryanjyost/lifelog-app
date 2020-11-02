@@ -3,6 +3,7 @@
    import firebase from "firebase/app";
    import Router from "svelte-spa-router";
    import Auth from "./components/Auth.svelte";
+
    import routes from "./routes";
    import { user } from "./stores";
 
@@ -23,8 +24,6 @@
    user.subscribe((val) => {
       isLoggedIn = !!val;
    });
-
-   $: console.log({ isLoggedIn });
 </script>
 
 <Auth useRedirect="{true}" let:user let:loggedIn let:loginWithEmail let:logout>
