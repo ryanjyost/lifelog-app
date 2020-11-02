@@ -9,6 +9,7 @@
    const auth = firebase.auth();
 
    export const logout = () => {
+      console.log("logout");
       window.location.reload();
       auth.signOut();
    };
@@ -22,7 +23,7 @@
 
    <div class="linksContainer">
       <a href="/#/confirm-phone">Link your phone number</a>
-      <a on:click="{logout}">Logout</a>
+      <a href="/" on:click="{logout}">Logout</a>
    </div>
 </AppShell>
 

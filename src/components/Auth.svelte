@@ -102,7 +102,6 @@
    } else if (firebaseUser) {
       fetchUser({ firebase_id: firebaseUser.id });
    } else {
-      console.log("attempted");
       attemptedAuth = true;
    }
 </script>

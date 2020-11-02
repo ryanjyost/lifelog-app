@@ -26,7 +26,11 @@
 
 <AppShell>
    <Header title="My Private Lifelog">
-      <a href="/#/menu" id="gearLink"><div class="hamgburgerMenuLine"></div></a>
+      <a href="/#/menu" id="gearLink">
+         <div class="hamgburgerMenuLine"></div>
+         <div class="hamgburgerMenuLine"></div>
+         <div class="hamgburgerMenuLine"></div>
+      </a>
    </Header>
    {#if !logs}
       <Loading>Syncing your lifelog...</Loading>
@@ -110,16 +114,22 @@
    }
 
    #gearLink {
-      font-size: 2rem;
+      width: 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      opacity: 0.8;
+   }
+
+   #gearLink:hover {
+      opacity: 1;
    }
 
    .hamgburgerMenuLine {
       width: 100%;
       height: 2px;
-      background-color: #fff;
+      background-color: rgba(255, 255, 255, 1);
+      margin: 1.5px 0px;
    }
 </style>
