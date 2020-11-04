@@ -1,6 +1,6 @@
 <script>
    import axios from "axios";
-   import { onMount } from "svelte";
+   import { onMount, onDestroy } from "svelte";
    import Loading from "./Loading.svelte";
    import Header from "./Header.svelte";
    import AppShell from "./AppShell.svelte";
@@ -23,7 +23,7 @@
    ];
 
    let newLogEntry;
-   let newLogText = "";
+   let newLogText = window.localStorage.getItem("newLogEntry") || "";
    let ref;
    let isLoading = false;
    let snackbar;
@@ -54,12 +54,15 @@
    onMount(() => {
       focusTextarea();
    });
+
+   onDestroy(() => {
+      window.localStorage.setItem("newLogEntry", newLogText);
+   });
 </script>
 
 <AppShell>
-   <Header showBackButton="{true}">
-      <button id="save_log_entry" disabled="{!newLogText.length}" on:click="{handleCreateLogEntry}">Save</button>
-   </Header>
+   <Header showBackButton="{true}" disableAction="{!newLogText.length}" onAction="{handleCreateLogEntry}" />
+
    <textarea
       disabled="{isLoading}"
       bind:value="{newLogText}"
@@ -75,7 +78,7 @@
 <style>
    textarea {
       width: 100%;
-      background-color: transparent;
+      background-color: rgba(255, 255, 255, 0.05);
       caret-color: rgba(255, 255, 255, 0.9);
       font-size: 20px;
       border: none;
@@ -83,30 +86,12 @@
       line-height: 1.3;
       color: rgba(255, 255, 255, 1);
       letter-spacing: 0.03em;
-      height: 100%;
+      min-height: calc(100vh - 50px);
       padding: 20px;
    }
 
    textarea:focus {
       border: none;
       outline: none;
-   }
-
-   #save_log_entry {
-      margin: 0px;
-      border-radius: 20px;
-      width: 90px;
-      background-color: rgba(179, 66, 204, 0.9);
-      border: 0px solid rgba(179, 66, 204, 0.9);
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-   }
-
-   #save_log_entry:disabled {
-      background-color: rgba(179, 66, 204, 0.5);
-      border: 0px solid rgba(179, 66, 204, 0.5);
-      color: rgba(255, 255, 255, 0.5);
-      cursor: default;
    }
 </style>

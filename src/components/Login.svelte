@@ -105,13 +105,6 @@
       text-align: center;
    }
 
-   label {
-      font-size: 14px;
-      text-align: left;
-      padding: 0px 10px;
-      width: 100%;
-   }
-
    input {
       width: 100%;
       margin-bottom: 0px;
@@ -120,6 +113,13 @@
       outline: none;
       padding: 10px 10px;
       color: #fff;
+   }
+
+   label {
+      font-size: 14px;
+      text-align: left;
+      padding: 0px 10px;
+      width: 100%;
    }
 
    form {
@@ -139,6 +139,15 @@
    .formInput:focus-within {
       border-bottom: 3px solid rgba(179, 66, 204, 1);
       color: rgba(255, 255, 255, 0.8);
+   }
+
+   .fullCentered {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /*justify-content: center;*/
+      height: 100vh;
+      text-align: center;
    }
 
    #emailLinkSentContainer {

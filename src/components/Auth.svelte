@@ -74,10 +74,7 @@
    auth.onAuthStateChanged(async (fireUser) => {
       if (fireUser) {
          const token = await fireUser.getIdTokenResult();
-         const userInfo = userMapper(token.claims);
-         console.log({ fireUser });
-
-         firebaseUser = userInfo;
+         firebaseUser = userMapper(token.claims);
       } else {
          user.set(null);
       }

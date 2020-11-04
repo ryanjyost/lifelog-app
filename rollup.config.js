@@ -8,8 +8,7 @@ import { config } from "dotenv";
 import replace from "@rollup/plugin-replace";
 
 const production = !process.env.ROLLUP_WATCH;
-const API_URL = process.env.API_URL;
-const CLIENT_URL = process.env.CLIENT_URL
+const { API_URL, TWILIO_PHONE, CLIENT_URL } = process.env;
 
 function serve() {
    let server;
@@ -57,6 +56,7 @@ export default {
                isProd: production,
                API_URL,
                CLIENT_URL,
+               TWILIO_PHONE,
                ...config().parsed, // attached the .env config
             },
          }),

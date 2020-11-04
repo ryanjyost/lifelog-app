@@ -32,6 +32,9 @@
          <div class="hamgburgerMenuLine"></div>
       </a>
    </Header>
+   {#if !$user.phone}
+      <a href="/#/confirm-phone" id="linkPhoneCTAContainer"><button id="linkPhoneCTA">Add new log entries by texting us</button></a>
+   {/if}
    {#if !logs}
       <Loading>Syncing your lifelog...</Loading>
    {:else}
@@ -48,6 +51,14 @@
 </AppShell>
 
 <style>
+   #linkPhoneCTAContainer {
+      padding: 0px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+   }
+
    caption {
       font-size: 0.5rem;
       color: rgba(255, 255, 255, 0.7);
@@ -86,8 +97,8 @@
       bottom: 20px;
       right: 20px;
       border-radius: 50%;
-      height: 60px;
-      width: 60px;
+      height: 50px;
+      width: 50px;
       line-height: 0;
       display: flex;
       align-items: center;
@@ -131,5 +142,16 @@
       height: 2px;
       background-color: rgba(255, 255, 255, 1);
       margin: 1.5px 0px;
+   }
+
+   #linkPhoneCTA {
+      margin: 20px auto;
+      width: 100%;
+      border-radius: 20px;
+      background-color: rgba(179, 66, 204, 1);
+      border: 0px solid rgba(179, 66, 204, 1);
+      box-shadow: 0 2px 5px rgba(255, 255, 255, 0.06), 0 2px 5px rgba(255, 255, 255, 0.14);
+      color: #fff;
+      cursor: pointer;
    }
 </style>
