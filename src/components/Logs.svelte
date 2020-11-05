@@ -32,9 +32,9 @@
          <div class="hamgburgerMenuLine"></div>
       </a>
    </Header>
-   {#if !$user.phone}
-      <a href="/#/confirm-phone" id="linkPhoneCTAContainer"><button id="linkPhoneCTA">Add new log entries by texting us</button></a>
-   {/if}
+   <!--   {#if !$user.phone}-->
+   <!--      <a href="/#/confirm-phone" id="linkPhoneCTAContainer"><button id="linkPhoneCTA">Add new log entries by texting us</button></a>-->
+   <!--   {/if}-->
    {#if !logs}
       <Loading>Syncing your lifelog...</Loading>
    {:else}
