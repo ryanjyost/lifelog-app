@@ -133,18 +133,18 @@
    </div>
 
    <label for="take-photo" class="floatingCircleBtn"> <span><i class="fas fa-camera"></i></span> </label>
-   <input type="file" id="take-photo" name="image" accept="image/*" bind:files on:change="{handleImageChange}" />
-
-   <label for="upload-photo"> <a><i class="fas fa-images"></i></a> </label>
    <input
       type="file"
-      id="upload-photo"
+      id="take-photo"
       name="image"
       capture="user"
       accept="image/*"
       bind:files
       on:change="{handleImageChange}"
    />
+
+   <label for="upload-photo"> <a><i class="fas fa-images"></i></a> </label>
+   <input type="file" id="upload-photo" name="image" accept="image/*" bind:files on:change="{handleImageChange}" />
    <!--   </form>-->
 
    {#if isLoading}
