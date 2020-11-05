@@ -132,13 +132,16 @@
       {/if}
    </div>
 
-   <label for="upload-photo" class="floatingCircleBtn"> <span><i class="fas fa-camera"></i></span> </label>
+   <label for="take-photo" class="floatingCircleBtn"> <span><i class="fas fa-camera"></i></span> </label>
+   <input type="file" id="take-photo" name="image" accept="image/*" bind:files on:change="{handleImageChange}" />
+
+   <label for="upload-photo"> <a><i class="fas fa-images"></i></a> </label>
    <input
       type="file"
       id="upload-photo"
       name="image"
+      capture="user"
       accept="image/*"
-      class="floatingCircleBtn"
       bind:files
       on:change="{handleImageChange}"
    />
@@ -175,10 +178,17 @@
       outline: none;
    }
 
-   label {
+   label[for="take-photo"] {
       position: fixed;
       bottom: 20px;
       right: 20px;
+   }
+
+   label[for="upload-photo"] {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      font-size: 24px;
    }
 
    label span {
@@ -193,6 +203,13 @@
    }
 
    #upload-photo {
+      position: absolute !important;
+      top: -9999px !important;
+      left: -9999px !important;
+      opacity: 0px;
+   }
+
+   #take-photo {
       position: absolute !important;
       top: -9999px !important;
       left: -9999px !important;
