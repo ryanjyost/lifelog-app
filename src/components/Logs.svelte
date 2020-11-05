@@ -54,6 +54,7 @@
 <style>
    img {
       width: 90%;
+      max-width: 300px;
       margin-bottom: 10px;
       border-radius: 15px;
       border: 1px solid rgba(255, 255, 255, 0.05);
