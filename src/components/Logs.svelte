@@ -134,10 +134,9 @@
       margin: 20px auto;
       width: 100%;
       border-radius: 20px;
-      background-color: rgba(179, 66, 204, 1);
-      border: 0px solid rgba(179, 66, 204, 1);
-      box-shadow: 0 2px 5px rgba(255, 255, 255, 0.06), 0 2px 5px rgba(255, 255, 255, 0.14);
-      color: #fff;
+      color: rgba(255, 255, 255, 0.8);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.1);
       cursor: pointer;
    }
 </style>
