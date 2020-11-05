@@ -4,16 +4,25 @@
    export let onAction;
    export let actionText = "Save";
    export let disableAction = false;
+   export let isSubmit = false;
+   export let headerClass = null;
 </script>
 
-<header>
+<header class="{headerClass}">
    {#if showBackButton}<a id="backButton" href="/#/logs">&larr;</a>{/if}
 
    {#if title}
       <h4>{title}</h4>
    {/if}
 
-   {#if onAction}<button id="actionButton" disabled="{disableAction}" on:click="{onAction}">{actionText}</button>{/if}
+   {#if onAction}
+      <button
+         id="actionButton"
+         disabled="{disableAction}"
+         on:click="{onAction}"
+         type="{isSubmit ? 'submit' : 'button'}"
+      >{actionText}</button>
+   {/if}
 
    <slot />
 </header>

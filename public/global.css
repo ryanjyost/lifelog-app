@@ -68,4 +68,28 @@ button:focus {
    border-color: #666;
 }
 
+.floatingCircleBtn {
+   border-radius: 50%;
+   height: 50px;
+   width: 50px;
+   line-height: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: rgba(179, 66, 204, 1);
+   border: 0px solid rgba(179, 66, 204, 1);
+   box-shadow: 0 2px 5px rgba(255, 255, 255, 0.06), 0 2px 5px rgba(255, 255, 255, 0.14);
+   cursor: pointer;
+}
 
+.floatingCircleBtn span {
+   margin-bottom: 6px;
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 40px;
+}
+
+.floatingCircleBtn span:hover {
+   margin-bottom: 6px;
+   color: rgba(255, 255, 255, 1);
+   font-size: 40px;
+}

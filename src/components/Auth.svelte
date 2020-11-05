@@ -119,7 +119,6 @@
    main {
       max-width: 500px;
       width: 100%;
-      padding-bottom: 20px;
-      /*height: 100%;*/
+      min-height: 100vh;
    }
 </style>
