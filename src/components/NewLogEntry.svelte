@@ -93,6 +93,7 @@
 
    onMount(() => {
       focusTextarea();
+      window.scrollTo(0, 0);
    });
 
    onDestroy(() => {
